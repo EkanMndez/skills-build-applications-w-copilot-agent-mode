@@ -25,3 +25,5 @@ http://localhost:8000/api/[component]/
 ```
 
 The frontend also tolerates both paginated and plain array responses.
+
+A safe fallback is included so the app does not generate `https://undefined-8000...` URLs when the environment variable is absent.
