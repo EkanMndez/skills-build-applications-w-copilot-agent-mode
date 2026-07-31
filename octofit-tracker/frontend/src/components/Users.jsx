@@ -8,7 +8,10 @@ export default function Users() {
   useEffect(() => {
     async function loadUsers() {
       try {
-        const apiUrl = buildApiUrl('users');
+        const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
+        const apiUrl = codespaceName
+          ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+          : 'http://localhost:8000/api/users/';
         const response = await fetch(apiUrl);
 
         if (!response.ok) {

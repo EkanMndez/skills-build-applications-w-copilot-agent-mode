@@ -8,7 +8,10 @@ export default function Activities() {
   useEffect(() => {
     async function loadActivities() {
       try {
-        const apiUrl = buildApiUrl('activities');
+        const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
+        const apiUrl = codespaceName
+          ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+          : 'http://localhost:8000/api/activities/';
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
