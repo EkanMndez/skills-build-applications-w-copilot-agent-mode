@@ -10,6 +10,11 @@ export default function Leaderboard() {
       try {
         const apiUrl = buildApiUrl('leaderboard');
         const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error(`Leaderboard endpoint returned ${response.status}`);
+        }
+
         const payload = await response.json();
         setEntries(normalizeResponse(payload));
       } catch (loadError) {

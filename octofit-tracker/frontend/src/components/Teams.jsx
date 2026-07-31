@@ -10,6 +10,11 @@ export default function Teams() {
       try {
         const apiUrl = buildApiUrl('teams');
         const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error(`Teams endpoint returned ${response.status}`);
+        }
+
         const payload = await response.json();
         setTeams(normalizeResponse(payload));
       } catch (loadError) {

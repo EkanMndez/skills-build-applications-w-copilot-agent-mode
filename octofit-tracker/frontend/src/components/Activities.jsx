@@ -10,6 +10,11 @@ export default function Activities() {
       try {
         const apiUrl = buildApiUrl('activities');
         const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error(`Activities endpoint returned ${response.status}`);
+        }
+
         const payload = await response.json();
         setActivities(normalizeResponse(payload));
       } catch (loadError) {

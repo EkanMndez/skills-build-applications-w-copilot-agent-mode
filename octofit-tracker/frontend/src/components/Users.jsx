@@ -10,6 +10,11 @@ export default function Users() {
       try {
         const apiUrl = buildApiUrl('users');
         const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error(`Users endpoint returned ${response.status}`);
+        }
+
         const payload = await response.json();
         setUsers(normalizeResponse(payload));
       } catch (loadError) {

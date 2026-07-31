@@ -10,6 +10,11 @@ export default function Workouts() {
       try {
         const apiUrl = buildApiUrl('workouts');
         const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error(`Workouts endpoint returned ${response.status}`);
+        }
+
         const payload = await response.json();
         setWorkouts(normalizeResponse(payload));
       } catch (loadError) {

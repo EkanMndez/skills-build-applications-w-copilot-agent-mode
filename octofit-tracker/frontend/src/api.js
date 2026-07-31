@@ -1,8 +1,32 @@
-const envName = import.meta.env.VITE_CODESPACE_NAME;
-const codespaceName = envName?.trim();
-const baseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000';
+function getCodespaceName() {
+  const envName = import.meta.env.VITE_CODESPACE_NAME;
+  const envCodespaceName = envName?.trim();
+
+  if (envCodespaceName) {
+    return envCodespaceName;
+  }
+
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
+  const hostname = window.location.hostname;
+  const match = hostname.match(/^(.+?)-\d+\.app\.github\.dev$/i);
+
+  return match ? match[1] : '';
+}
+
+function getBaseUrl() {
+  const codespaceName = getCodespaceName();
+
+  if (codespaceName) {
+    return `https://${codespaceName}-8000.app.github.dev`;
+  }
+
+  return 'http://localhost:8000';
+}
+
+const baseUrl = getBaseUrl();
 
 export function buildApiUrl(resource) {
   const safeResource = String(resource || '').replace(/^\/+/g, '').replace(/\/+$/g, '');
