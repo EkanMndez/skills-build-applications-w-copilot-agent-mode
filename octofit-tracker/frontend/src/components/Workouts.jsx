@@ -8,7 +8,8 @@ export default function Workouts() {
   useEffect(() => {
     async function loadWorkouts() {
       try {
-        const response = await fetch(buildApiUrl('workouts'));
+        const apiUrl = buildApiUrl('workouts');
+        const response = await fetch(apiUrl);
         const payload = await response.json();
         setWorkouts(normalizeResponse(payload));
       } catch (loadError) {

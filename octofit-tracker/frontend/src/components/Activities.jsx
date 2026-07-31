@@ -8,7 +8,8 @@ export default function Activities() {
   useEffect(() => {
     async function loadActivities() {
       try {
-        const response = await fetch(buildApiUrl('activities'));
+        const apiUrl = buildApiUrl('activities');
+        const response = await fetch(apiUrl);
         const payload = await response.json();
         setActivities(normalizeResponse(payload));
       } catch (loadError) {

@@ -8,7 +8,8 @@ export default function Users() {
   useEffect(() => {
     async function loadUsers() {
       try {
-        const response = await fetch(buildApiUrl('users'));
+        const apiUrl = buildApiUrl('users');
+        const response = await fetch(apiUrl);
         const payload = await response.json();
         setUsers(normalizeResponse(payload));
       } catch (loadError) {

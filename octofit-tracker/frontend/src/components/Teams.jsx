@@ -8,7 +8,8 @@ export default function Teams() {
   useEffect(() => {
     async function loadTeams() {
       try {
-        const response = await fetch(buildApiUrl('teams'));
+        const apiUrl = buildApiUrl('teams');
+        const response = await fetch(apiUrl);
         const payload = await response.json();
         setTeams(normalizeResponse(payload));
       } catch (loadError) {

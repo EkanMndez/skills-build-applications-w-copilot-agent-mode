@@ -8,7 +8,8 @@ export default function Leaderboard() {
   useEffect(() => {
     async function loadLeaderboard() {
       try {
-        const response = await fetch(buildApiUrl('leaderboard'));
+        const apiUrl = buildApiUrl('leaderboard');
+        const response = await fetch(apiUrl);
         const payload = await response.json();
         setEntries(normalizeResponse(payload));
       } catch (loadError) {
